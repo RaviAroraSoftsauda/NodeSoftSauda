@@ -1,0 +1,85 @@
+{{> header}}
+{{> nav}}
+<div id="page-wrapper">
+    <div class="row">
+<div class="col-lg-6" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                 <div class="panel-heading" id="edit" style="display:none">
+                      <i class="fa fa-bell fa-fw"></i>EDIT PRODUCT
+                 </div>
+                <div class="panel-heading" id="add">
+                    <i class="fa fa-bell fa-fw"></i>ADD PRODUCT
+                    {{#if err}}
+                        <div class="alert alert-danger">
+                            <strong>{{err}}</strong>
+                        </div>
+                    {{/if}}
+                    {{#if errors}}
+                             <div class="alert alert-danger">
+                                <strong>{{errors}}</strong>
+                            </div>
+                    {{/if}}
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-success brandsuccess" style="display:none;"></div>
+                    <div class="alert alert-danger branddanger" style="display:none;"></div>
+                     <form method="POST" action="/product/product_add" enctype="" id="addproduct">
+                    <div class="row"> 
+                         <div class="col-sm-12">
+                         <label>Item Name:</label>
+                            <input class="form-control item_name" placeholder="Item Name"name="item_name" type="text">
+                            <span class="form_error">Please Enter Item Name </span>
+                    </div> 
+                </div>
+                <br/>
+                <button type="submit" name="save" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+             <form method="POST" action=""  class="edit_product" id="edit_product" style="display:none;">
+                    <div class="row"> 
+                         <div class="col-sm-12">
+                        <label>Item Name:</label>
+                            <input class="form-control item_name" placeholder="Item Name"name="item_name" type="text">
+                            <span class="form_error">Please Enter Item Name </span>
+                    </div>  
+                </div>
+                <br/>
+                <button type="submit" name="save" class="btn btn-success">Update</button>
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+        </div>
+      </div>
+      </div>
+        <div class="col-lg-6" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i>PRODUCT LIST
+                </div>
+                <div class="table-responsive">
+                    <table class="product_detail_table">
+                        <thead>
+                        <tr>
+                            <th>Sno.</th>
+                            <th>Item Name</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                      </tr>  
+                        </thead>
+                        <tbody>
+                                {{#each product as |value key|}}
+                                <tr>
+                                    <td>{{sum @index 1}}</td>
+                                    <td>{{this.item_name}}</td>
+                                    <td><a href="javascript:void(0);"  class="edit_product_btn" data-id="{{this._id}}"><i class="fa fa-pencil"></i></i></a></td>
+                                    <td><a href="javascript:void(0);" class="delete-product" data-id="{{this._id}}"><i class="fa fa-trash-o" style="color:red;"></a></td>
+                               </tr>
+                              {{/each}}  
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                </div>
+        </div>  
+        </div>
+        {{> footer}}

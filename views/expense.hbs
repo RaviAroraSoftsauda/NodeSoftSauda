@@ -1,0 +1,123 @@
+{{> header}}
+{{> nav}}
+<div id="page-wrapper">
+    <div class="row">
+<div class="col-lg-6" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="edit" style="display:none">
+                        <i class="fa fa-bell fa-fw"></i>Edit Expense
+                </div>
+                <div class="panel-heading" id="add">
+                    <i class="fa fa-bell fa-fw"></i>Add Expense
+                    {{#if err}}
+                        <div class="alert alert-danger">
+                            <strong>{{err}}</strong>
+                        </div>
+                    {{/if}}
+                    {{#if errors}}
+                             <div class="alert alert-danger">
+                                <strong>{{errors}}</strong>
+                            </div>
+                    {{/if}}
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-success brandsuccess" style="display:none;"></div>
+                    <div class="alert alert-danger branddanger" style="display:none;"></div>
+                     <form method="POST" action="/expense/expense_add" enctype="" id="expense">
+                    <div class="row">
+                         <div class="col-sm-12">
+                         <label>Expense Name:</label>
+                            <input class="form-control expense_name" placeholder="Expense Name" name="expense_name" type="text">
+                            <span class="form_error">Please Enter Expense Name </span>
+                    </div> 
+                </div>
+                 <div class="row"> 
+                         <div class="col-sm-12">
+                          <label>Type:</label>
+                        <select class="form-control expense_type" name="expense_type">
+                                <option value="">--Select Type--</option>
+                                <option value="+">+</option>
+                                <option value="-">-</option>
+                                <option value="-%">-%</option>
+                                <option value="-Q">-Q</option>
+                                <option value="+Q">+Q</option>
+                                <option value="-W">-W</option>
+                                <option value="+W">+W</option>
+                                <option value="-R">-R</option>
+                                <option value="+R">+R</option>
+                            </select>
+                             <span class="form_error">Please Enter Expense Type</span>
+                    </div> 
+                </div>
+                <br/>
+                <button type="submit" name="save" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+             <form method="POST" action=""  class="edit_expense" id="edit_expense" style="display:none;">
+                    <div class="row"> 
+                         <div class="col-sm-12">
+                         <label>Expense Name:</label>
+                            <input class="form-control expense_name" value="" name="expense_name" type="text">
+                            <span class="form_error">Please Enter Expense Name </span>
+                    </div>  
+                </div>
+                  <div class="row"> 
+                         <div class="col-sm-12">
+                          <label>Type:</label>
+                        <select class="form-control expense_type" name="expense_type">
+                                <option value="">--Select Type--</option>
+                                <option value="+">+</option>
+                                <option value="-">-</option>
+                                <option value="-%">-%</option>
+                                <option value="-Q">-Q</option>
+                                <option value="+Q">+Q</option>
+                                <option value="-W">-W</option>
+                                <option value="+W">+W</option>
+                                <option value="-R">-R</option>
+                                <option value="+R">+R</option>
+                            </select>
+                             <span class="form_error">Please Enter Expense Type</span>
+                    </div> 
+                </div>
+                <br/>
+                <button type="submit" name="save" class="btn btn-success">Update</button>
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+        </div>
+      </div>
+      </div>
+        <div class="col-lg-6" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i>Expense LIST
+                </div>
+                <div class="table-responsive">
+                    <table class="product_detail_table">
+                        <thead>
+                        <tr>
+                            <th>Sno.</th>
+                            <th>Expense Name</th>
+                            <th>Type</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                      </tr>  
+                        </thead>
+                        <tbody>
+                                 {{#each expense as |value key|}}
+                                 <tr>
+                                    <td>{{sum @index 1}}</td>
+                                    <td>{{this.expense_name}}</td>
+                                    <td>{{this.expense_type}}</td>
+                                    <td><a href="javascript:void(0);"  class="edit_expense_btn" data-id="{{this._id}}"><i class="fa fa-pencil"></i></i></a></td>
+                                    <td><a href="javascript:void(0);" class="delete-expense" data-id="{{this._id}}"><i class="fa fa-trash-o" style="color:red;"></a></td>
+                               </tr>
+                              {{/each}}  
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                </div>
+        </div>  
+        </div>
+        {{> footer}}

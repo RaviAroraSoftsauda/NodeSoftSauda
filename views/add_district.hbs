@@ -1,0 +1,114 @@
+{{> header}}
+{{> nav}}
+<div id="page-wrapper">
+    <div class="row">
+<div class="col-lg-6" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="edit" style="display:none">
+                    <i class="fa fa-bell fa-fw"></i>EDIT DISTRICT
+                </div>
+                <div class="panel-heading" id="add">
+                    <i class="fa fa-bell fa-fw"></i>ADD DISTRICT
+                    {{#if err}}
+                        <div class="alert alert-danger">
+                            <strong>{{err}}</strong>
+                        </div>
+                    {{/if}}
+                    {{#if errors}}
+                             <div class="alert alert-danger">
+                                <strong>{{errors}}</strong>
+                            </div>
+                    {{/if}}
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-success brandsuccess" style="display:none;"></div>
+                    <div class="alert alert-danger branddanger" style="display:none;"></div>
+                     <form method="POST" action="/add_district/District_add" enctype="" id="adddis">
+                    <div class="row"> 
+                    </div>
+                     <div class="row"> 
+                         <div class="col-sm-12">
+                        <label>District Name:</label>
+                        <input class="form-control dis_name" placeholder="District Name"name="dis_name" type="text">
+                        <span class="form_error">Please Enter District Name</span>
+                    </div>
+                    </div> 
+                    <div class="row">
+                   <div class="col-sm-12 ">
+                    <label>State Name:</label>
+                    <select class="form-control state_name" id="state_id" name="state_id">
+                    <option>State Name</option>
+                    {{state_masters}}
+                        {{#each state_masters}}
+                        <option value="{{this._id}}" data-serialnum="{{this._id}}">{{this.state_name}}</option>
+                        {{/each}}
+                    </select>
+                    <span class="form_error">Please Enter State Name</span>
+                 </div> 
+                </div>
+                <br/>
+                <button type="submit" name="save" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+             <form method="POST" action=""  class="edit_district" id="edit_district" style="display:none;">
+                    <div class="row"> 
+                         <div class="col-sm-12">
+                        <label>District Name:</label>
+                        <input class="form-control dis_name" value="" name="dis_name" type="text">
+                        <span class="form_error">Please Enter District Name</span>
+                    </div> 
+                   <div class="col-sm-12 ">
+                    <label>State Name:</label>
+                    <select class="form-control state_id" id="state_id" name="state_id">
+                    <option>State Name</option>
+                        {{#each state_masters}}
+                        <option value="{{this._id}}" data-serialnum="{{this._id}}">{{this.state_name}}</option>
+                        {{/each}}
+                    </select>
+                    <span class="form_error">Please Enter State Name</span>
+                 </div> 
+                </div>
+                <br/>
+                <button type="submit" name="save" class="btn btn-success">Update</button>
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+        </div>
+      </div>
+      </div>
+        <div class="col-lg-6" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i>DISTRICT LIST
+                </div>
+                <div class="table-responsive">
+                    <table class="product_detail_table">
+                        <thead>
+                        <tr>
+                            <th>Sno.</th>
+                            <th>State Name</th>
+                            <th>District Name</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                      </tr>  
+                        </thead>
+                        <tbody>
+                            {{!-- {{district_master}} --}}
+                                {{#each district_master as |value key|}}
+                                <tr>
+                                    <td>{{sum @index 1}}</td>
+                                    <td>{{this.state_id.state_name}}</td>
+                                    <td>{{this.dis_name}}</td>
+                                    <td><a href="javascript:void(0);"  class="edit_district_btn" data-id="{{this._id}}"><i class="fa fa-pencil"></i></i></a></td>
+                                    <td><a href="javascript:void(0);" class="delete-district" data-id="{{this._id}}"><i class="fa fa-trash-o" style="color:red;"></a></td>
+                               </tr>
+                            {{/each}}  
+                           
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                </div>
+        </div>  
+        </div>
+        {{> footer}}

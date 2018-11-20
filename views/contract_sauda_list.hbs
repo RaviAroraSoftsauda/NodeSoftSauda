@@ -1,0 +1,61 @@
+{{> header}}
+{{> nav}}
+<div id="page-wrapper">
+    <div class="row">
+         <div class="col-lg-12">
+            <a href="/contract_sauda/contract_sauda" style="color:white"><h1 class="btn btn-primary pull-left" style="margin-bottom: 21px;">Add Contract Sauda</h1></a>
+             {{!-- <button type="submit" class="btn btn-primary pull-right"> Submit </button> --}}
+        </div>
+            {{!-- <div class="panel panel-default"> --}}
+                {{!-- <div class="panel-heading"> --}}
+                    {{#if err}}
+                        <div class="alert alert-danger">
+                            <strong>{{err}}</strong>
+                        </div>
+                    {{/if}}
+                    {{#if errors}}
+                             <div class="alert alert-danger">
+                                <strong>{{errors}}</strong>
+                            </div>
+                    {{/if}}
+                {{!-- </div> --}}
+      {{!-- </div> --}}
+        <div class="col-lg-12" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i>Contract Sauda List
+                </div>
+                <div class="table-responsive">
+                    <table class="product_detail_table ">
+                        {{!-- {{contract}} --}}
+                        <thead>
+                        <tr>
+                            <th>Sno.</th>
+                            <th>Date</th>
+                            <th>Seller</th>
+                            <th>Buyer</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                      </tr>  
+                        </thead>
+                        <tbody>
+                            {{!-- {{contract}} --}}
+                                {{#each contract as |value key|}}
+                                <tr>
+                                    <td>{{this.vouc_code}}</td>
+                                    <td>{{dateformat value.sd_date 'DD/MM/YYYY'}}</td>
+                                    <td>{{value.sl_code.party_name}}</td>
+                                    <td>{{value.br_code.party_name}}</td>
+                                    <td><a href="/contract_sauda/contract_sauda_list_update/{{value._id}}"><i class="fa fa-pencil"></i></a></td>
+                                    <td><a href="/contract_sauda/delete_contract_sauda/{{value._id}}" onclick="return confirm('Are you sure want to delete.');"><i class="fa fa-trash-o" style="color:red;"></i></a></td>
+                               </tr>
+                              {{/each}}  
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                </div>
+        </div>  
+        </div>
+        {{> footer}}

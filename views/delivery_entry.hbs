@@ -1,0 +1,599 @@
+{{> header}}
+{{> nav}}
+<div id="page-wrapper">
+    <div class="row">
+<div class="col-lg-12" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i>Delivery Entry
+                    {{#if err}}
+                        <div class="alert alert-danger">
+                            <strong>{{err}}</strong>
+                        </div>
+                    {{/if}}
+                    {{#if errors}}
+                             <div class="alert alert-danger">
+                                <strong>{{errors}}</strong>
+                            </div>
+                    {{/if}}
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-success brandsuccess" style="display:none;"></div>
+                    <div class="alert alert-danger branddanger" style="display:none;"></div>
+                     <form method="POST" action="/delivery_entry/add" class="repeater" enctype="" id="delivery_entry" style="width: 912px;">
+                 <div class="row"> 
+                         <div class="col-sm-2">
+                           {{!-- {{contract}} --}}
+                            <label>Ref Number:</label>
+                    </div> 
+                         <div class="col-sm-2">
+                            <input name="c_j_s_p"  placeholder="Ref Number" value="DLV"  class="form-control c_j_s_p">
+                    </div> 
+                         <div class="col-sm-2">
+                           <input type="text" name="vouc_code" placeholder="Delivery Number" value="{{maxno delveryentry1}}"  class="form-control item_name">
+                    </div>    
+                     <div class="col-sm-2">
+                      <label>Delivery Date:</label>
+                    </div> 
+                          <div class="col-sm-2">
+                         <input type="text" class="form-control" name="sd_date" id="offerstartdate" value="{{dateformat Date.now 'DD/MM/YYYY'}}" autocomplete="off"/>
+                    </div> 
+                    {{!-- <div class="col-sm-2">
+                             <input type="checkbox" name="brok_yn" value="Yes" checked=""> Buyer
+                    </div>    --}}
+                </div>
+                  <div class="row"> 
+                         <div class="col-sm-2">
+                            <input type="checkbox" name="br_brok" value="Yes" checked="" required="">Buyer
+                    </div> 
+                         <div class="col-sm-4">
+                            {{#listbsrt party 'B' 'br_code' 'br_code'}}
+                                {{this.party_name}}
+                            {{/listbsrt}}
+                              {{!-- <select name="br_code" list="br_code" class="form-control" id=""> 
+                                    {{#each party}}
+                                    <option value="{{this._id}}" data-party_id="{{this._id}}">{{this.party_name}}</option>
+                                    {{/each}}
+                                </select> --}}                                                                       
+                    </div> 
+                     <div class="col-sm-2">
+                            <label>contact:</label>
+                    </div> 
+                    
+                    <div class="col-sm-4">
+                        <div class="kind_name_div">
+                          <input type="text" name="br_cont" id="br_cont" class="form-control">
+                    </div>
+                     
+                    </div> 
+                </div>
+                  <div class="row"> 
+                         <div class="col-sm-2">
+                            <input type="checkbox" name="bb_brok" value="Yes">Buyer Broker
+                    </div> 
+                     <div class="col-sm-4">
+                         {{#listbsrt party 'R' 'bb_code' 'bbcode'}}
+                                {{this.party_name}}
+                            {{/listbsrt}}
+                         {{!-- <select name="bb_brok" list="bb_code" id="bb_brok" class="form-control"> 
+                             {{#each party}}
+                                <option value="{{this.id}}" data-sb_id="{{this.id}}">{{this.party_name}}</option>
+                            {{/each}}
+                        </select>     --}}
+                    </div> 
+                     <div class="col-sm-2">
+                         <label>contact:</label>
+                    </div> 
+                    <div class="col-sm-4">
+                        <div class="sb_cont_div">
+                          <input type="text" name="bb_cont" id="bb_cont" class="form-control">
+                          </div>
+                    </div> 
+                </div>
+                  <div class="row"> 
+                         <div class="col-sm-2">
+                            <input type="checkbox" name="sl_brok" value="Yes" checked="" required="">Seller
+                    </div> 
+                    <div class="col-sm-4">
+                         {{#listbsrt party 'S' 'sl_code' 'slcode'}}
+                                {{this.party_name}}
+                            {{/listbsrt}}
+                           {{!-- <select name="sl_code" list="sl_code" id="sl_code" class="form-control"> 
+                            {{#each party}}
+                                <option value="{{this.id}}" data-br_id="{{this.id}}">{{this.party_name}}</option>
+                            {{/each}}
+                        </select> --}}
+                    </div>
+                 
+                     <div class="col-sm-2">
+                         <label>contact:</label>
+                    </div> 
+                    <div class="col-sm-4">
+                          <div class="br_cont_div">
+                          <input type="text" name="sl_cont" id="sl_cont" class="form-control">
+
+                          </div>
+                    </div> 
+                </div>
+                  <div class="row"> 
+                         <div class="col-sm-2">
+                            <input type="checkbox" name="sb_brok" value="Yes">Seller Broker
+                    </div> 
+                    <div class="col-sm-4">
+                         {{#listbsrt party 'T' 'sb_code' 'sbcode'}}
+                                {{this.party_name}}
+                            {{/listbsrt}}
+                           {{!-- <select name="sb_code" list="sb_code" id="sb_code" class="form-control"> 
+                            {{#each party}}
+                                <option value="{{this.id}}" data-bb_id="{{this.id}}">{{this.party_name}}</option>
+                            {{/each}}
+                        </select> --}}
+                    </div>
+                     <div class="col-sm-2">
+                         <label>contact:</label>
+                    </div> 
+                    <div class="col-sm-4">
+                        <div class="bb_cont_div">
+                          <input type="text" name="sb_cont" id="sb_cont" class="form-control">
+                          </div>
+                    </div>  
+                </div>
+                
+                <br/>
+                  <div class="table-responsive"  style="display:none" id="delivery">
+                    <div class="brand_add_container clearfix">
+                <div class="contract_brand_row">
+                <table>
+                    <thead style="background-color:#ddd;color: black;">
+                        <tr>
+                            <th>Sauda</th>
+                            <th>Date</th>
+                            <th>Seller</th>
+                            <th>Seller Broker</th>
+                            <th>Product</th>
+                            <th>Brand</th>
+                            <th>Bag</th>
+                            <th>Pack</th>
+                            <th>Weight</th>
+                            <th>Rate</th>
+                            <th>dispat</th>
+                            <th>Amt</th>
+                            <th>Delivery</th>
+                            <th>New Bal</th>
+                            <th>Bal Rmv</th>
+                        </tr>
+                    </thead>
+                            <tbody class="delivery_repeat_row"> 
+                              <tr>
+                                      <td><input type="text" name="disvouc_code" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="dissd_date" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="dispsl_code" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="dispsb_code" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="p_code" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="brand_code" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="bag" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="pck" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="wght" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="sd_rate" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="dis_patch" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="amount" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="delivery_amt" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="new_bal" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                                      <td><input type="text" name="bal_rmv" id="delivery_sauda" class="form-control" style="width: 72px;"></td>
+                               </tr> 
+                            </tbody>
+                        </table>
+                    </div>          
+                    </div>
+                    <div class='addsauda'></div>
+                    
+                   </div>
+                <br/>
+                     <div class="table-responsive">
+        <table class="contract_repeat_row">
+             <thead style="background-color:#ddd;color: black;">
+                <tr>
+                <th>Product</th>
+                <th>Brand</th>
+                <th>Bag</th>
+                <th>Pack</th>
+                <th>Unit</th>
+                <th>Wght</th>
+                <th>Sauda Rt</th>
+                <th>Seller Rt</th>
+                <th>Buyer Rt</th>
+                <th>Rate /Type</th>
+                <th>Qtl /Tons</th>
+                <th>Per</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Old/New</th>
+                <th>IPack</th>
+                <th>SI Brok Rt</th>
+                <th>Type</th>
+                <th>SL.Brok</th>
+                <th>By Brok Rt</th>
+                <th>Type</th>
+                <th>By Brok</th>
+                <th>SI Brok Rt</th>
+                <th>Type</th>
+                <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{!-- <tr> --}}
+                {{!-- <td>
+                    <select name="contract_sauda_group[1][p_code]"  id="inp_code"  class="form-control" style="width:102px;"> 
+                    {{#each product_mast}}
+                    <option value="{{this._id}}" data-product_id="{{this._id}}">{{this.product_name}}</option>
+                    {{/each}}
+                    </select>
+                </td> --}}
+                {{!-- <td>
+                    <select name="contract_sauda_group[1][brand_code]" list="brand_name" class="form-control brand_name" style="width: 102px;"> 
+                    {{#each brand}}
+                    <option value="{{this.id}}" data-dis_id="{{this.id}}">{{this.brand_name}}</option>
+                    {{/each}}
+                </select>
+                </td> --}}
+                {{!-- <td>
+                    <input type="text" name="contract_sauda_group[1][bag]" id="bag1" oninput='calc(1)' class="form-control" style="width: 72px;" required>
+                </td>
+                <input type="hidden" name="cntr{{sum @index 1}}" value="{{sum @index 1}}" id="cntr{{sum @index 1}}" class="form-control" style="width: 102px;">
+                <td class="pack_name"> --}}
+                {{!-- <div> --}}
+                    {{!-- <input type="text" name="contract_sauda_group[1][pck]" id="pck1" oninput='calc(1)' class="form-control" style="width: 72px;" required> --}}
+                {{!-- </div> --}}
+                {{!-- </td>
+                <td>
+                    <select name="contract_sauda_group[1][pck_unit]" list="brnd_code" id="inbrnd_code"  class="form-control" style="width: 72px;">
+                    <option value="KG">KG</option>
+                    </select>
+                </td>
+                <td><input type="text" name="contract_sauda_group[1][wght]" id="wght1" oninput='calc(1)' class="form-control wght" style="width: 82px;"></td>
+                <td><input type="text" name="contract_sauda_group[1][sd_rate]" id="sel_rate1" oninput='calc(1)' class="form-control wght" style="width: 72px;" required></td>
+                <td><input type="text" name="contract_sauda_group[1][s_rate]" id="seler_rate1"  class="form-control" style="width: 72px;"></td>
+                <td><input type="text" name="contract_sauda_group[1][b_rate]" id="buy_rate1" class="form-control" style="width: 72px;"></td>
+                <td>
+                    <select name="contract_sauda_group[1][w_q]" id="w_q1" oninput='calc(1)' class="form-control w_q" style="width: 72px;">
+                    <option value="W">W</option>
+                    <option value="Q">Q</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="contract_sauda_group[1][wghtunit]" id="wghtunit1" oninput='calc(1)' class="form-control" style="width: 72px;">
+                    <option value="Qtl">Qtl</option>
+                    <option value="Tons">Tons</option>
+                    <option value="Kg">Kg</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="contract_sauda_group[1][rateper]" id="rateper1" oninput='calc(1)' class="form-control" style="width: 62px;">
+                    <option value="">Select...</option>
+                    <option value="1">1</option>
+                    <option value="10">10</option>
+                    <option value="100">100</option>
+                </select>
+                </td>
+                <td><input type="text" name="contract_sauda_group[1][amount]" id="amount1" class="form-control amount" style="width: 102px;"></td>
+                <td>
+                    <select name="contract_sauda_group[1][pcktype]" id="pcktype" class="form-control" style="width: 102px;">
+                    <option value="Gross">Gross</option>
+                    <option value="Net">Net</option>
+                    </select>
+                </td> 
+                <td>
+                    <select name="contract_sauda_group[1][g_n]" id="g_n" class="form-control" style="width: 102px;">
+                    <option value="">Select...</option>
+                    <option value="O">O</option>
+                    <option value="N">N</option>
+                    </select>
+                </td>
+                <td><input type="text" name="contract_sauda_group[1][ipack]" class="form-control" style="width: 102px;"></td>
+                <td><input type="text" name="contract_sauda_group[1][slbrk_rt]" id="slbrk_rt" class="form-control" style="width: 102px;"></td>
+                <td>
+                    <select name="contract_sauda_group[1][slbrk_type]" id="slbrk_type" class="form-control" style="width: 102px;">
+                    <option value="%">%</option>
+                    <option value="PBag">PBag</option>
+                    <option value="PQtl">PQtl</option>
+                    <option value="Fix">Fix</option>
+                    </select>
+                </td>
+                <td><input type="text" name="contract_sauda_group[1][slbrk_amt]" id="slbrk_amt" class="form-control" style="width: 102px;"></td>
+                <td><input type="text" name="contract_sauda_group[1][brbrk_rt]"  id="brbrk_rt" class="form-control" style="width: 102px;"></td>
+                <td>
+                    <select name="contract_sauda_group[1][brbrk_typ]" id="brbrk_typ" class="form-control" style="width: 102px;">
+                    <option value="">Select...</option>
+                    <option value="%">%</option>
+                    <option value="PBag">PBag</option>
+                    <option value="PQtl">PQtl</option>
+                    <option value="Fix">Fix</option>
+                    </select>
+                </td>
+                <td><input type="text" name="contract_sauda_group[1][brbrk_amt]" id="amount2" class="form-control" style="width: 102px;"></td>
+                <td><input type="text" name="slbrk_rte" id="slbrk_rte" class="form-control" style="width: 102px;"></td>
+                <td>
+                    <select name="contract_sauda_group[1][slbrk_typ]" id="slbrk_typ" class="form-control" style="width: 102px;">
+                    <option value="">Select...</option>
+                    <option value="%">%</option>
+                    <option value="PBag">PBag</option>
+                    <option value="PQtl">PQtl</option>
+                    <option value="Fix">Fix</option>
+                    </select>
+                </td> --}}
+            {{!-- </tr>  --}}
+              {{!-- <tr  >
+               </tr> --}}
+            </tbody>
+            <tbody id="contract_div"></tbody>
+    </table>
+    </div>
+    <center><a id="add" class="addMachine" style="font-size: 30px;cursor:pointer;"><i class="fa fa-plus" aria-hidden="true"></i></a></center>
+     
+                
+                <div class="row"> 
+
+                         <div class="col-sm-2">
+                            <label style="margin-left: 22px;">Total Bags:</label>
+                    </div> 
+                         <div class="col-sm-2">
+                            <input name="tot_bags" id="tot_bags"  placeholder="Total Bags" class="form-control tot_bags" style="margin-left: -58px;">
+                    </div> 
+                     <div class="col-sm-2">
+                            <label>Total Wght:</label>
+                    </div> 
+                         <div class="col-sm-2">
+                             
+                          <input type="text" name="tot_wght" id="tot_wght"   placeholder="Total tot_wght" class="form-control item_name" style="margin-left: -68px;">
+                    </div>
+                          
+                     <div class="col-sm-2">
+                      <label>Total Ammount:</label>
+                    </div> 
+                          <div class="col-sm-2">
+                          <input type="text" name="tot_ammount" id="tot_ammount" placeholder="Total Ammount" class="form-control tot_ammount" style="margin-left: -48px;">
+                    </div>     
+                </div>
+                <br/>
+                <div class="col-lg-12">
+               <div class="panel panel-default">
+                 <div class="row"> 
+                         <div class="col-sm-3">
+                             <label style="margin-left: 12px;">Bill Number</label>     
+                    </div> 
+                    <div class="col-sm-2">
+                            <input type="text" name="bno" placeholder="Bill Number" class="form-control">
+                    </div>
+                     <div class="col-sm-1">
+                          <label style="margin-left: 12px;">Date</label>
+                    </div> 
+                    <div class="col-sm-2"> 
+                          <input type="text" name="bdt" value="{{dateformat Date.now 'DD/MM/YYYY'}}" class="form-control datepicker">
+                    </div> 
+                     <div class="col-sm-2">
+                          <label >Motar No</label>
+                    </div>
+                     <div class="col-sm-2"> 
+                          <input type="text" name="mot_no" class="form-control">
+                    </div>
+                </div>
+                <div class="row"> 
+                         <div class="col-sm-3">
+                             <label style="margin-left: 12px;">Transport</label>     
+                    </div> 
+                    <div class="col-sm-5">
+                         <select name="tptcode" id="tptcode" class="form-control">
+                            {{#each transport}}
+                            <option value="{{this._id}}">{{this.transport_name}}</option>
+                            {{/each}}
+                         </select> 
+                    </div> 
+                     <div class="col-sm-3">
+                          <label >Collection</label>
+                    </div>
+                     <div class="col-sm-1">
+                         <input type="text" name="tpt_col" placeholder="Collection" class="form-control" style="margin-left: -76px;width: 122px;">   
+                    </div>
+                </div>
+                  <div class="row"> 
+                         <div class="col-sm-3">
+                             <label style="margin-left: 12px;">Freight</label>     
+                    </div> 
+                    <div class="col-sm-2">
+                            <input type="text" name="frght" placeholder="Freight" class="form-control">
+                    </div>
+                     <div class="col-sm-1">
+                          <label style="margin-left: 12px;">Rate</label>
+                    </div> 
+                    <div class="col-sm-2"> 
+                          <input type="text" name="frght_rt" placeholder="Rate" class="form-control">
+                    </div> 
+                     <div class="col-sm-2">
+                          <label >Advance</label>
+                    </div>
+                     <div class="col-sm-2"> 
+                          <input type="text" name="frght_adv" placeholder="Advance" class="form-control" style="    margin-left: -1px;width: 123px;">
+                    </div>
+                </div>
+                <div class="row"> 
+                         <div class="col-sm-3">
+                             <label style="margin-left: 12px;">Term</label>     
+                    </div> 
+                    <div class="col-sm-2">
+                         <select name="term" id="term" class="form-control">
+                            {{#each term}}
+                            <option value="{{this._id}}">{{this.term_name}}</option>
+                            {{/each}}
+                         </select>  
+                    </div>
+                     <div class="col-sm-2">
+                         <input type="radio" name="paycond" value="D" style="margin-left: -18px;">
+                    </div> 
+                    <div class="col-sm-2">
+                        <label style="margin-left: -140px;">Discount</label> 
+                    </div>
+                    <div class="col-sm-1"> 
+                         <input type="radio" name="paycond" value="C" style="margin-left: -120px;">
+                    </div> 
+                     <div class="col-sm-1">
+                          <label style="margin-left: -149px;">Credit</label>
+                    </div>
+                     <div class="col-sm-1">
+                           <input type="text" name="cre_days" class="form-control" style="margin-left: -78px;width: 124px;">
+                    </div>
+                    <div class="col-sm-1" style="margin-top: -33px;">
+                          <label style="margin-left: 475px;">Days/%</label>
+                    </div>
+                </div>
+                <div class="row"> 
+                         <div class="col-sm-3">
+                             <label style="margin-left: 12px;">Add1</label>     
+                    </div> 
+                    <div class="col-sm-2">
+                            <input type="text" name="add1_rmk" placeholder="Add1" class="form-control">
+                    </div>
+                     <div class="col-sm-2">
+                         <input type="text" name="add1_amt" placeholder="Ammount" class="form-control">
+                    </div> 
+                    <div class="col-sm-1"> 
+                        <label style="margin-left: 12px;">Less1</label>
+                    </div> 
+                    <div class="col-sm-2">
+                            <input type="text" name="less1_rmk" placeholder="Less1" class="form-control">
+                    </div>
+                     <div class="col-sm-2">
+                         <input type="text" name="less1_amt" placeholder="Ammount" class="form-control">
+                    </div>
+                </div>
+                <div class="row"> 
+                         <div class="col-sm-3">
+                             <label style="margin-left: 12px;">Add2</label>     
+                    </div> 
+                    <div class="col-sm-2">
+                            <input type="text" name="add2_rmk" placeholder="Add2" class="form-control">
+                    </div>
+                     <div class="col-sm-2">
+                         <input type="text" name="add2_amt" placeholder="Ammount" class="form-control">
+                    </div> 
+                    <div class="col-sm-1"> 
+                        <label style="margin-left: 12px;">Less2</label>
+                    </div> 
+                    <div class="col-sm-2">
+                            <input type="text" name="less2_rmk" placeholder="Less2" class="form-control">
+                    </div>
+                     <div class="col-sm-2">
+                         <input type="text" name="less2_amt" placeholder="Ammount" class="form-control">
+                    </div>
+                </div>
+                <div class="row"> 
+                         <div class="col-sm-3">
+                             <label style="margin-left: 12px;">Add3</label>     
+                    </div> 
+                    <div class="col-sm-2">
+                            <input type="text" name="add3_rmk" placeholder="Add3" class="form-control" >
+                    </div>
+                     <div class="col-sm-2">
+                         <input type="text" name="add3_amt" placeholder="Ammount" class="form-control">
+                    </div> 
+                    <div class="col-sm-1"> 
+                        <label style="margin-left: 12px;">Less3</label>
+                    </div> 
+                    <div class="col-sm-2">
+                            <input type="text" name="less3_rmk" placeholder="Less3" class="form-control">
+                    </div>
+                     <div class="col-sm-2">
+                         <input type="text" name="less3_amt" placeholder="Ammount" class="form-control">
+                    </div>
+                </div>
+                </div>
+                </div>
+                <div class="col-lg-12">
+               <div class="panel panel-default">
+                <br/>
+                 <div class="row"> 
+                     <div class="col-sm-5">
+                          <label style="margin-left: 12px;">Other Terms & condition</label>
+                    </div>
+                     <div class="col-sm-7">
+                         <select name="party_terms" id="party_terms" class="form-control">
+                            {{#each narration}}
+                            <option value="{{this._id}}">{{this.narration_name}}</option>
+                            {{/each}}
+                         </select>
+                    </div>
+                </div>
+                <br/>
+                 <div class="row"> 
+                         <div class="col-sm-5">
+                             <label style="margin-left: 12px;">Remarks</label>     
+                    </div> 
+                    <div class="col-sm-7">
+                            <input type="text" name="party_remarks" class="form-control">
+                    </div>
+                </div>
+                <div class="row"> 
+                         <div class="col-sm-5">
+                             <label style="margin-left: 12px;">Bargain Amt(Calcutation)</label>     
+                    </div> 
+                    <div class="col-sm-7">
+                            <input type="text" name="barg_amt" class="form-control">
+                    </div>
+                </div>
+                 <div class="row"> 
+                         <div class="col-sm-5">
+                             <label style="margin-left: 12px;">Bill Amt(Party Bill)</label>     
+                    </div> 
+                    <div class="col-sm-7">
+                            <input type="text" name="bill_amt" class="form-control">
+                    </div>
+                </div>
+                <br/>
+                </div>
+                 </div>
+    </div>
+                <br/>
+                 <div class="box-footer">
+                      <input type="submit" class="btn btn-info " value="submit" id="submit">
+                       <input type="reset" class="btn btn-default pull-right" value="Clear Form">
+                </div>
+            </form>
+            </div>
+      
+        {{!-- <div class="col-lg-6" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i>Group LIST
+                </div>
+                <div class="table-responsive">
+                    <table class="product_detail_table">
+                        <thead>
+                        <tr>
+                            <th>Sno.</th>
+                            <th>Group Name</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                      </tr>  
+                        </thead>
+                        <tbody>
+                                {{#each group as |value key|}}
+                                <tr>
+                                    <td>{{sum @index 1}}</td>
+                                    <td>{{this.group_name}}</td>
+                                    <td><a href="javascript:void(0);"  class="edit_group_btn" data-id="{{this._id}}"><i class="fa fa-pencil"></i></i></a></td>
+                                    <td><a href="javascript:void(0);" class="delete-group" data-id="{{this._id}}"><i class="fa fa-trash-o" style="color:red;"></a></td>
+                               </tr>
+                              {{/each}}  
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                </div> --}}
+        </div>  
+        </div>
+        <style>
+            tbody td {
+            padding: 0px;
+            }
+        </style>
+        {{> footer}}

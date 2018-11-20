@@ -1,0 +1,169 @@
+{{> header}}
+{{> nav}}
+<div id="page-wrapper">
+    <div class="row">
+<div class="col-lg-6" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="edit" style="display:none">
+                    <i class="fa fa-bell fa-fw"></i>EDIT CITY
+                </div>
+                <div class="panel-heading" id="add">
+                    <i class="fa fa-bell fa-fw"></i>ADD CITY
+                    {{#if err}}
+                        <div class="alert alert-danger">
+                            <strong>{{err}}</strong>
+                        </div>
+                    {{/if}}
+                    {{#if errors}}
+                             <div class="alert alert-danger">
+                                <strong>{{errors}}</strong>
+                            </div>
+                    {{/if}}
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-success brandsuccess" style="display:none;"></div>
+                    <div class="alert alert-danger branddanger" style="display:none;"></div>
+                    <form  method="POST" action="/add_city/city_add" enctype="" id="addcity">
+                    <div class="row"> 
+                         <div class="col-sm-12">
+                       <label>City Name:</label>
+                        <input class="form-control city_name" placeholder="City Name"name="city_name" type="text">
+                        <span class="form_error">Please Enter City Name</span>
+                    </div> 
+                   <div class="col-sm-12 ">
+                     <label>District Name:</label>
+                    <select class="form-control dis_name" name="dis_name" id="dis_name">
+                        <option>District Name</option>
+                            {{#each district_master}}
+                            <option value="{{this._id}}" data-dis_id="{{this.state_id}}">{{this.dis_name}}</option>
+                            {{/each}}
+                        </select>
+                        <span class="form_error">Please Enter District Name</span>
+                 </div> 
+                </div>
+               <div class="row">                     
+                    <div class="col-sm-12 ">
+                     <label>State Name:</label>
+                        <div class="state_name_div">
+                            <select class="form-control state_name" name="state_name" id="state_name">
+                        {{!-- <input type="text" name="state_name" id="state_name" list="state" placeholder="State name" class="form-control">
+                        <datalist id="state">  --}}
+                                {{#each state_master}}
+                                <option value="{{this.id}}">{{this.state_name}}</option>
+                                {{/each}}
+                        {{!-- </datalist> --}}
+                        </select>
+                        </div>
+                </div> 
+                   <div class="col-sm-12">
+                    <label>City Pincode:</label>
+                    <input class="form-control city_code" placeholder="City Name"name="city_code" type="text">
+                    <span class="form_error">Please Enter City Pincode</span>
+                 </div> 
+                </div>
+                <div class="row">                     
+                    <div class="col-sm-12">
+                        <label>Std Code:</label>
+                    <input class="form-control city_std_code" placeholder="City Name"name="city_std_code" type="text">
+                    <span class="form_error">Please Enter Std Code</span>
+                    </div> 
+                </div>
+                <br/>
+                <button type="submit" name="save" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+             <form method="POST" action=""  class="edit_city" id="edit_city" style="display:none;">
+                    <div class="row">
+                         <div class="col-sm-12">
+                       <label>City Name:</label>
+                        <input class="form-control city_name" placeholder="City Name" value="" name="city_name" type="text">
+                        <span class="form_error">Please Enter City Name</span>
+                    </div> 
+                   <div class="col-sm-12 ">
+                     <label>District Name:</label>
+                    <select class="form-control dis_name" name="dis_name" id="dis_name">
+                        <option>District Name</option>
+                            {{#each district_master}}
+                           
+                            <option value="{{this._id}}" data-dis_id="{{this.state_id}}">{{this.dis_name}}</option>
+                            {{/each}}
+                        </select>
+                        <span class="form_error">Please Enter District Name</span>
+                 </div> 
+                </div>
+               <div class="row">                     
+                    <div class="col-sm-12 ">
+                     <label>State Name:</label>
+                       <div class="state_name_div">
+                       <select class="form-control state_name" name="state_name" id="state_name">
+                        {{!-- <input type="text" name="state_name" id="state_name" list="state" placeholder="State name" class="form-control">
+                        <datalist id="state">  --}}
+                                {{#each state_master}}
+                                <option value="{{this.id}}">{{this.state_name}}</option>
+                                {{/each}}
+                        {{!-- </datalist> --}}
+                        </select>
+                        </div>
+                </div> 
+                   <div class="col-sm-12">
+                    <label>City Pincode:</label>
+                    <input class="form-control city_code" placeholder="City Name" value="" name="city_code" type="text">
+                    <span class="form_error">Please Enter City Pincode</span>
+                 </div> 
+                </div>
+                <div class="row">                     
+                    <div class="col-sm-12">
+                        <label>Std Code:</label>
+                    <input class="form-control city_std_code" value="" placeholder="City Name"name="city_std_code" type="text">
+                    <span class="form_error">Please Enter Std Code</span>
+                    </div> 
+                </div>
+                <br/>
+                <button type="submit" name="save" class="btn btn-success">Update</button>
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+        </div>
+      </div>
+      </div>
+        <div class="col-lg-6" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i>CITY LIST
+                </div>
+                <div class="table-responsive">
+                    <table class="product_detail_table">
+                        <thead>
+                        <tr>
+                            <th>Sno.</th>
+                            <th>State Name</th>
+                            <th>District Name</th>
+                            <th>City Name</th>
+                            <th>City Pincode</th>
+                            <th>Std Code</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                      </tr>  
+                        </thead>
+                        <tbody>
+                            {{#each city_master as |value key|}}
+                            <tr>
+                                <td>{{sum @index 1}}</td>
+                                <td>{{this.state_name.state_name}}</td>
+                                <td>{{this.dis_name.dis_name}}</td>
+                                <td>{{this.city_name}}</td>
+                                <td>{{this.city_code}}</td>
+                                <td>{{this.city_std_code}}</td>
+                                <td><a href="javascript:void(0);"  class="edit_city_btn" data-id="{{this._id}}"><i class="fa fa-pencil"></i></i></a></td>
+                                <td><a href="javascript:void(0);" class="delete-city" data-id="{{this._id}}"><i class="fa fa-trash-o" style="color:red;"></a></td>
+                            </tr>
+                            {{/each}}  
+                           
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                </div>
+        </div>  
+        </div>
+        {{> footer}}

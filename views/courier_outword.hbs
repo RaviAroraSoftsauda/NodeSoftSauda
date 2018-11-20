@@ -1,0 +1,261 @@
+{{> header}}
+{{> nav}}
+<div id="page-wrapper">
+    <div class="row">
+<div class="col-lg-6" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                   Courier Outward
+                    {{#if err}}
+                        <div class="alert alert-danger">
+                            <strong>{{err}}</strong>
+                        </div>
+                    {{/if}}
+                    {{#if errors}}
+                             <div class="alert alert-danger">
+                                <strong>{{errors}}</strong>
+                            </div>
+                    {{/if}}
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-success brandsuccess" style="display:none;"></div>
+                    <div class="alert alert-danger branddanger" style="display:none;"></div>
+                    <form class="form-horizontal form-label-left" action="/courier_outword/courier_outword_add" method="post" id="courier_outword">
+                    <div class="row"> 
+                         <div class="col-sm-6">
+                        <label>Date:</label>
+                        <input type="date" id="cou_date" value="2018-09-13" name="cou_date" class="form-control">
+                    </div> 
+                   <div class="col-sm-6 ">
+                    <label>Party Name:</label> 
+                    <input type="hidden" name="hiparty_sno" id="hiparty_sno" value="980">
+                    <input name="party_sno" list="party_sno" id="inparty_sno" class="form-control party_name">
+
+                    <datalist id="party_sno">
+                    <option value="">Select Party Name</option>
+                    {{#each party}}
+                        <option value="{{this.party_name}}" data-serialnum="{{this.party_name}}">{{this.party_name}}</option>
+                    {{/each}}
+                    </datalist>
+                    <span class="form_error">Please Enter Party Name</span>
+                 </div> 
+                </div>
+               <div class="row">                     
+                    <div class="col-sm-6 ">
+                    <label>Courier Name:</label>
+                    <input name="cou_nm" list="cou_nm" id="incou_nm" class="form-control">
+                    <datalist id="cou_nm">
+                    <option value="">Select None</option>
+                    {{#each courier}}
+                        <option value="{{this.courier_name}}" data-serialnum="{{this.courier_name}}">{{this.courier_name}}</option>
+                    {{/each}}
+                    </datalist>
+                    
+                </div> 
+                   <div class="col-sm-6">
+                    <label>Lot No(Vakal):</label> 
+                     <input type="text" name="cou_lotno" id="cou_lotno" class="form-control">
+                 </div> 
+                </div>
+                <div class="row">                     
+                    <div class="col-sm-6">
+                    <label>Product:</label>
+                    <input name="cou_product" list="cou_product" id="incou_product"  class="form-control">
+                    <datalist id="cou_product">  
+                    <option value="">Select Name </option>
+                    {{#each product}}
+                            <option value="{{this.item_name}}" data-serialnum="{{this.item_name}}">{{this.item_name}}</option>
+                        {{/each}}
+                    </datalist>
+                </div> 
+                   <div class="col-sm-6">
+                    <label>Brand</label>
+                    {{!-- <input type="hidden" name="hidcou_brand" id="hidcou_brand" value="3DAIMOND"> --}}
+                    <input name="cou_brand" list="cou_brand" id="incou_brand" class="form-control">
+                    <datalist id="cou_brand">   
+                    <option value="">Select Brand </option>
+                    {{#each brand}}
+                        <option value="{{this.brand_name}}" data-serialnum="{{this.brand_name}}">{{this.brand_name}}</option>
+                    {{/each}}
+                    </datalist>
+                 </div> 
+                </div>
+                 <div class="row">                     
+                    <div class="col-sm-6">
+                        <label>Rate:</label>
+                        <input type="text" name="cou_rate" id="cou_rate" class="form-control">
+                    </div>
+                  <div class="col-sm-6">
+                    <label>Rate(Condition):</label>
+                    <input type="text" name="cou_contdition" id="cou_contdition"  class="form-control">
+                </div>
+                </div>
+                 <div class="row"> 
+                    <div class="col-sm-6">
+                        <label>Courier Receipt:</label>
+                        <input type="text" name="cou_rcpt" id="cou_rcpt" class="form-control">
+                    </div>
+                   <div class="col-sm-6">
+                    <label>Courier Content:</label>
+                    <input type="text" name="cou_content" id="cou_content"  class="form-control">
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="col-sm-6">
+                        <label>Remarks:</label>
+                        <input type="text" name="remarks" id="remarks"  class="form-control">
+                    </div>
+                  <div class="col-sm-6">
+                    <label>Courier Charges:</label>
+                    <input type="text" name="cou_crgs" id="cou_crgs"  class="form-control">
+                </div>
+                </div>
+                <br/>
+                <button type="submit" name="save" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+             <form method="POST" action=""  class="edit_courier_outword" id="edit_courier_outword" style="display:none;">
+                    <div class="row"> 
+                         <div class="col-sm-6">
+                        <label>Date:</label>
+                        <input type="date"  value="" name="cou_date" class="form-control cou_date">
+                    </div> 
+                   <div class="col-sm-6 ">
+                    <label>Party Name:</label> 
+                    <input type="hidden" name="hiparty_sno" id="hiparty_sno" value="980">
+                    <input name="party_sno" list="party_sno"  class="form-control party_sno">
+
+                    <datalist id="party_sno">
+                    <option value="">Select Party Name</option>
+                    {{#each party}}
+                        <option value="{{this.party_name}}" data-serialnum="{{this.party_name}}">{{this.party_name}}</option>
+                    {{/each}}
+                    </datalist>
+                 </div> 
+                </div>
+               <div class="row">                     
+                    <div class="col-sm-6 ">
+                    <label>Courier Name:</label>
+                    <input name="cou_nm" list="cou_nm" class="form-control cou_nm">
+                    <datalist id="cou_nm">
+                    <option value="">Select None</option>
+                    {{#each courier}}
+                        <option value="{{this.courier_name}}" data-serialnum="{{this.courier_name}}">{{this.courier_name}}</option>
+                    {{/each}}
+                    </datalist>
+                </div> 
+                   <div class="col-sm-6">
+                    <label>Lot No(Vakal):</label> 
+                     <input type="text" name="cou_lotno" value=""  class="form-control cou_lotno">
+                 </div> 
+                </div>
+                <div class="row">                     
+                    <div class="col-sm-6">
+                    <label>Product:</label>
+                    <input name="cou_product" list="cou_product" class="form-control cou_product">
+                    <datalist id="cou_product">  
+                    <option value="">Select Name </option>
+                    {{#each product}}
+                            <option value="{{this.item_name}}" data-serialnum="{{this.item_name}}">{{this.item_name}}</option>
+                        {{/each}}
+                    </datalist>
+                </div> 
+                   <div class="col-sm-6">
+                    <label>Brand</label>
+                    {{!-- <input type="hidden" name="hidcou_brand" id="hidcou_brand" value="3DAIMOND"> --}}
+                    <input name="cou_brand" list="cou_brand" class="form-control cou_brand">
+                    <datalist id="cou_brand">   
+                    <option value="">Select Brand </option>
+                    {{#each brand}}
+                        <option value="{{this.brand_name}}" data-serialnum="{{this.brand_name}}">{{this.brand_name}}</option>
+                    {{/each}}
+                    </datalist>
+                 </div> 
+                </div>
+                 <div class="row">                     
+                    <div class="col-sm-6">
+                        <label>Rate:</label>
+                        <input type="text" name="cou_rate" value="" class="form-control cou_rate">
+                    </div>
+                  <div class="col-sm-6">
+                    <label>Rate(Condition):</label>
+                    <input type="text" name="cou_contdition" value="" class="form-control cou_contdition">
+                </div>
+                </div>
+                 <div class="row"> 
+                    <div class="col-sm-6">
+                        <label>Courier Receipt:</label>
+                        <input type="text" name="cou_rcpt" value="" class="form-control cou_rcpt">
+                    </div>
+                   <div class="col-sm-6">
+                    <label>Courier Content:</label>
+                    <input type="text" name="cou_content" value="" class="form-control cou_content">
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="col-sm-6">
+                        <label>Remarks:</label>
+                        <input type="text" name="remarks" value="" class="form-control remarks">
+                    </div>
+                  <div class="col-sm-6">
+                    <label>Courier Charges:</label>
+                    <input type="text" name="cou_crgs" value="" class="form-control cou_crgs">
+                </div>
+                </div>
+                <br/>
+                <button type="submit" name="Update" class="btn btn-success">Update</button>
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+        </div>
+      </div>
+      </div>
+        <div class="col-lg-6" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i>Courier Outword List
+                </div>
+                <div class="table-responsive">
+                    <table class="product_detail_table">
+                        <thead>
+                        <tr>
+                            <th>Sno.</th>
+                            <th>Party Name</th>
+                            <th>Product</th>
+                            <th>Brand</th>
+                            <th>Courier Name</th>
+                            <th>Courier Receipt</th>
+                            <th>Courier Content</th>
+                            <th>Remarks</th>
+                            <th>Courier Charges</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                    </tr>  
+                        </thead>
+                        <tbody>
+                           {{#each courier_outword as |value key|}}
+                            <tr>
+                                <td>{{sum @index 1}}</td>
+                                <td>{{this.party_sno}}</td>
+                                <td>{{this.cou_product}}</td>
+                                <td>{{this.cou_brand}}</td>
+                                <td>{{this.cou_nm}}</td>
+                                <td>{{this.cou_rcpt}}</td>
+                                <td>{{this.cou_content}}</td>
+                                <td>{{this.remarks}}</td>
+                                <td>{{this.cou_crgs}}</td>
+                                <td><a href="javascript:void(0);" class="edit_courier_outword_btn" data-id="{{this._id}}"><i class="fa fa-pencil"></i></a></td>
+                                <td><a href="javascript:void(0);" class="delete_courier_outword" data-id="{{this._id}}"><i class="fa fa-trash-o" style="color:red;"></i></a></td>
+                                {{!-- <td><a href="/courier_inword/courier_inword_list_update/{{value._id}}"><i class="fa fa-pencil"></i></a></td>
+                                <td><a href="/courier_inword/delete_courier_inword/{{value._id}}" onclick="return confirm('Are you sure want to delete.');"><i class="fa fa-trash-o" style="color:red;"></i></a></td> --}}
+                            </tr>
+                            {{/each}}
+                           
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                </div>
+        </div>  
+        </div>
+        {{> footer}}

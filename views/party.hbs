@@ -1,0 +1,258 @@
+{{> header}}
+{{> nav}}
+<div id="page-wrapper">
+    <div class="row">
+<div class="col-lg-12" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i>Add Party Masters
+                    {{#if err}}
+                        <div class="alert alert-danger">
+                            <strong>{{err}}</strong>
+                        </div>
+                    {{/if}}
+                    {{#if errors}}
+                             <div class="alert alert-danger">
+                                <strong>{{errors}}</strong>
+                            </div>
+                    {{/if}}
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-success brandsuccess" style="display:none;"></div>
+                    <div class="alert alert-danger branddanger" style="display:none;"></div>
+                      <form method="POST" action="/party/party_add"  class="repeater" style="width: 892px;">
+                      <div class="row"> 
+                         <div class="col-sm-8">
+                            <input type="checkbox" name="p_type[]" value="B" checked=""> Buyer
+                            <input type="checkbox" name="p_type[]" value="S"> Seller
+                            <input type="checkbox" name="p_type[]" value="R"> Buyer Broker
+                            <input type="checkbox" name="p_type[]" value="T"> Seller Broker
+                    </div> 
+                      
+                </div>
+                <br/>
+                    <div class="row">
+                         <div class="col-sm-4">
+                          <label>Party Name</label>
+                            <input class="form-control party_name" name="party_name"  placeholder="Party Name" type="text" autocomplete="off"/>
+                            <span class="form_error">Please enter Party Name</span>
+                    </div> 
+                    <div class="col-sm-4">
+                         <label> Address1</label>
+                            <input class="form-control address1" placeholder="Address1" type="text" name="address1" />
+                            <span class="form_error">Please enter Address</span>
+                    </div>
+                     <div class="col-sm-4">
+                          <label>Address2</label>
+                        <input class="form-control address2" placeholder="Address2" type="text" name="address2"/>
+                        <span class="form_error">Please enter Address</span>
+                    </div>  
+                      
+                </div>
+                 <div class="row">
+                     
+                         <div class="col-sm-4">
+                         <label>Area Name</label>
+                        <input class="form-control area_name" placeholder="Area name" type="text" name="area_name" />
+                        <span class="form_error">Please enter Area name</span>
+                    </div> 
+                    <div class="col-sm-4">
+                          <label>City Name</label>
+                            <select name="city_name" id="city_name"  class="form-control city_name" required>
+                                <option value="">Select City</option>
+                            {{#each city}}
+                            <option value="{{this.id}}" data-city="{{this.id}}">{{this.city_name}}</option>
+                            {{/each}}
+                            </select>
+                            <span class="form_error">Please Select City name</span>
+                    </div>  
+                     <div class="col-sm-4">
+                          <label>State Name</label>
+                          <div class="state_name_div">
+                                <select name="state_name" id="state_name"  class="form-control state_name" required>
+                            {{!-- {{#each state}}
+                            <option value="{{this.id}}" data-serialnum="{{this.id}}">{{this.state_name}}</option>
+                            {{/each}} --}}
+                            </select>
+                          </div>
+                            <span class="form_error">Please Select State name</span>
+                    </div> 
+                     
+                </div>
+                <div class="row"> 
+                   
+                         <div class="col-sm-4">
+                          <label>Pin Code</label>
+                        <input class="form-control pin_code" placeholder="Pin Code"  type="text" name="pin_code" />
+                        <span class="form_error">Please enter Pin Code</span>
+                    </div> 
+                     <div class="col-sm-4">
+                           <label>Credit Limit</label>
+                            <input class="form-control credit_limit" placeholder="Credit Limit" type="text" name="credit_limit" />
+                            <span class="form_error">Please enter Credit Limit</span>
+                    </div> 
+                    <div class="col-sm-4">
+                        <label>PAN</label>
+                        <input class="form-control pan_no" placeholder="PAN Number" type="text" name="pan_no" />        
+                    </div>   
+                </div>
+                 <div class="row"> 
+                     
+                     <div class="col-sm-4">
+                          <label>GSTIN</label>
+                            <input class="form-control gstin" placeholder="GSTIN" type="text" name="gstin" />
+                            <span class="form_error">Please enter GSTIN</span>
+                    </div>  
+                         <div class="col-sm-4">
+                         <label>Phone (Office) </label>
+                            <input class="form-control phone_ofc" placeholder="Phone (Office)" type="text" name="phone_ofc" />
+                            <span class="form_error">Please enter Phone (Office)</span>
+                    </div> 
+                     <div class="col-sm-4">
+                            <label>Phone(Resi.) </label>
+                            <input class="form-control phone_resi" placeholder="Phone(Resi.)" type="text" name="phone_resi" />
+                            <span class="form_error">Please enter Phone(Resi.)</span>
+                    </div>  
+                    
+                </div>
+                <div class="row"> 
+                    
+                    <div class="col-sm-4">
+                          <label>FSSAI </label>
+                            <input class="form-control fssai" placeholder="FSSAI" type="text" name="fssai" />
+                            <span class="form_error">Please enter FSSAI</span>
+                    </div>  
+                         <div class="col-sm-4">
+                         <label>FAX </label>
+                            <input class="form-control fax" placeholder="FAX" type="text" name="fax" />
+                            <span class="form_error">Please enter FAX</span>
+                    </div>
+                      <div class="col-sm-4">
+                           <label>Mobile No.(sms)  </label>
+                            <input class="form-control mob_no" placeholder="Mobile No.(sms)" type="text" name="mob_no" />
+                            <span class="form_error">Please enter Mobile No.(sms)</span>
+                    </div> 
+                </div>
+                <div class="row"> 
+                   
+                    <div class="col-sm-4">
+                          <label>Mobile No. </label>
+                            <input class="form-control fssai" placeholder="Mobile No" type="text" name="mob_num" />
+                            <span class="form_error">Please enter FSSAI</span>
+                    </div> 
+                         <div class="col-sm-4">
+                        <label>Proprietor  </label>
+                            <select name="proprietor_name" id="proprietor_name"  class="form-control proprietor_name">
+                                {{#each proprietor}}
+                                <option value="{{this._id}}" data-serialnum="{{this._id}}">{{this.proprietor_name}}</option>
+                                {{/each}}
+                                </select>
+                            <span class="form_error">Please Select Proprietor</span>
+                    </div> 
+                     <div class="col-sm-4">
+                           <label>Group  </label>
+                            <select name="group_name" id="group_name"  class="form-control group_name">
+                                    {{#each group}}
+                                    <option value="{{this._id}}" data-serialnum="{{this._id}}">{{this.group_name}}</option>
+                                    {{/each}}
+                                </select>
+                                <span class="form_error">Please Select Group</span>
+                    </div>  
+                    <div class="col-sm-4">
+                          <label>Category  </label>
+                            <select name="category" id="category"  class="form-control category">
+                                <option value="">Select...</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
+                         <span class="form_error">Please Select Category</span>
+                    </div>  
+                     <div class="col-sm-4">
+                        <label>Remark  </label>
+                            <input class="form-control remark" placeholder="Remark" type="text" name="remark" />
+                            <span class="form_error">Please Select Remark</span>
+                    </div>    
+                </div>
+                <br/>
+                 <div class="row"> 
+                         <div class="col-sm-4">
+                           <input type="checkbox" name="working" value="Y" checked="">Working
+                        <input type="checkbox" name="envelope" value="Y" checked="">Envelope
+                    </div>    
+                </div>
+                <br/>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Bank Details</h1>
+                </div>
+            </div>
+            <div class="input-group-col col-sm-3"><label>Bank Name</label></div>
+            <div class="input-group-col col-sm-3"><label>IFSC Code</label></div>
+            <div class="input-group-col col-sm-3"><label>Account No</label></div>
+            <div class="input-group-col col-sm-3"><label>Branch Name</label></div>
+            <div class="row">
+                   <div class="col-sm-12">
+            <div class="brand_add_container clearfix">
+                <div data-repeater-list="party_bank" class="main_brand_row">
+                    <div data-repeater-item class="brand_repeat_row">
+                        <div class="input-group-col col-sm-3">
+                            <select class="form-control bank_name" name="bank_name">
+                                <option value="">Select Bank</option>
+                                {{#each bank}}
+                                <option value="{{this._id}}" data-serialnum="{{this._id}}">{{this.bank_name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="input-group-col col-sm-3">
+                            
+                            <input class="form-control" name="ifc_code"  placeholder="IFSC Code" type="text" autocomplete="off"/>
+                        </div>
+                        <div class="input-group-col col-sm-3">
+                        <input class="form-control" type="text" placeholder="Account No" name="account_no"/>
+                        </div>
+                            <div class="input-group-col col-sm-3">
+                            <input class="form-control" type="text" placeholder="Branch" name="branch_name"/>
+                        </div>
+                        <div class="input-group-col col-sm-12">
+                            <input data-repeater-delete type="button" value="X" style="float: right;margin-top: -58px; margin-right: -108px;" class="inner btn btn-danger"/>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main_brand_add_button">
+                    <input data-repeater-create type="button" style="margin-top: -108px;margin-left: 12px;width: 42px;" value="+" class="btn btn-primary"/>
+                </div>
+            </div>    
+                </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Contact Details</h1>
+                </div>
+            </div>
+             <div class="col-sm-12">
+                        <div class="row contact_row">
+                        <div class="row">
+                        <div class="input-group-col col-sm-3"><label>Contact</label></div>
+                    <div class="input-group-col col-sm-3"><label>Mobile</label></div>
+                    <div class="input-group-col col-sm-3"><label>Email</label></div>
+                    <div class="input-group-col col-sm-3"><label>Document</label></div>
+                     </div>
+                </div>
+                   <input type="button" value="+" class="contact-add-btn btn btn-primary" style="margin-top: -68px;width: 42px;float: right;margin-right: 22px;">
+            </div>
+                            </div>    
+                        </div>
+                         
+                        <br/>
+                        <button type="submit" name="save" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+        </div>
+      </div>
+      </div>
+        </div>  
+        </div>
+        {{> footer}}

@@ -1,0 +1,251 @@
+{{> header}}
+{{> nav}}
+<div id="page-wrapper">
+    <div class="row">
+<div class="col-lg-12" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="edit" style="display:none">
+                     <i class="fa fa-bell fa-fw"></i>Edit Product Masters
+                </div>
+                <div class="panel-heading" id="show">
+                    <i class="fa fa-bell fa-fw"></i>Add Product Masters
+                    {{#if err}}
+                        <div class="alert alert-danger">
+                            <strong>{{err}}</strong>
+                        </div>
+                    {{/if}}
+                    {{#if errors}}
+                             <div class="alert alert-danger">
+                                <strong>{{errors}}</strong>
+                            </div>
+                    {{/if}}
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-success brandsuccess" style="display:none;"></div>
+                    <div class="alert alert-danger branddanger" style="display:none;"></div>
+                     <form method="POST" action="/product_mast/product_mast_add" class="repeater" enctype="" id="product_mast" style=" width: 892px;">
+                    <div class="row">
+                         <div class="col-sm-4">
+                          <label>Product Code:</label>
+                            <input class="form-control p_code" placeholder="Product Code" name="p_code" type="number">
+                            <span class="form_error">Please Enter Product Code </span>
+                    </div> 
+                         <div class="col-sm-4">
+                          <label>Product Name:</label>
+                            <input class="form-control product_name" placeholder="Product Name" name="product_name" type="text" required="">
+                            <span class="form_error">Please Enter Product Name </span>
+                    </div> 
+                       <div class="col-sm-4">
+                          <label>Short Name:</label>
+                            <input class="form-control short_name" placeholder="Short Name" name="short_name" type="text">
+                            <span class="form_error">Please Enter Short Name </span>
+                    </div>    
+                </div>
+                 <div class="row"> 
+                  
+                      <div class="col-sm-4">
+                          <label>HSN Code:</label>
+                            <input class="form-control hsn_code" placeholder="HSN Code" name="hsn_code" type="text">
+                            <span class="form_error">Please Enter HSN Code </span>
+                    </div> 
+                         <div class="col-sm-4">
+                          <label>Item Group:</label>
+                           <input name="item_name" list="item_name" placeholder="Item Group" class="form-control item_name" required="">
+                          <datalist id="item_name">  
+                            <option value="">Select Name </option>
+                            {{#each product}}
+                            <option value="{{this.item_name}}" data-serialnum="{{this.item_name}}">{{this.item_name}}</option>
+                            {{/each}}
+                        </datalist>
+                            <span class="form_error">Please Enter State Name</span>
+                    </div> 
+                     <div class="col-sm-4">
+                          <label>Item Unit:</label>
+                            <select class="form-control item_unit" name="item_unit" id="item_unit">
+                                <option value="">Select Unit...</option>
+                                <option value="Bori">Bori</option>
+                                <option value="Katta">Katta</option>
+                                <option value="Box">Box</option>
+                                <option value="KG">KG</option>
+                            </select>
+                            <span class="form_error">Please Enter Item Unit </span>
+                    </div>  
+                </div>
+                <br/>
+                <div class="row">
+                   <div class="col-sm-12">
+            <div class="brand_add_container clearfix">
+                <div data-repeater-list="product_mast_group" class="main_brand_row">
+                    <div class="input-group-col col-sm-2"><label>Pack Size in(KG)</label></div>
+                    <div class="input-group-col col-sm-2"><label>Katta/Bori/Box</label></div>
+                    <div class="input-group-col col-sm-2"><label>Brok Rate (Seller)</label></div>
+                    <div class="input-group-col col-sm-2"><label>Brok Rate Type (Seller)</label></div>
+                    <div class="input-group-col col-sm-2"><label>Brok Rate (Buyer)</label></div>
+                     <div class="input-group-col col-sm-2"><label>Brok Rate Type (Buyer)</label></div>
+                    <div data-repeater-item class="brand_repeat_row">
+                                        <div class="input-group-col col-sm-2">
+                                            <input class="form-control" name="it_pck" value="" placeholder="Packing" type="text" autocomplete="off"/>
+                                        </div>
+                                        <div class="input-group-col col-sm-2">
+                                            <select name="it_bk" id="it_bk" value="" class="form-control">
+                                                <option value="">Select...</option>
+                                                <option value="katta">Katta</option>
+                                                <option value="bori">Bori</option>
+                                                <option value="box">Box</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group-col col-sm-2">
+                                        <input class="form-control" type="text" placeholder="Brokerage Rate(Seller)" name="it_ratesl"/>
+                                        </div>
+                                        <div class="input-group-col col-sm-2">
+                                        <select name="it_ratetypsl" id="it_ratetypsl" value="" class="form-control">
+                                            <option value="">Select...</option>
+                                            <option value="%">%</option>
+                                            <option value="PBag">PBag</option>
+                                            <option value="PQtl">PQtl</option>
+                                            <option value="Fix">Fix</option>
+                                        </select>
+                                        </div>
+                                         <div class="input-group-col col-sm-2">
+                                        <input class="form-control" type="text" placeholder="Brokerage Rate (Buyer)" name="it_ratebr"/>
+                                        </div>
+                                        <div class="input-group-col col-sm-2">
+                                        <select name="it_ratetypbr" id="it_ratetypbr" value="" class="form-control">
+                                            <option value="">Select...</option>
+                                            <option value="%">%</option>
+                                            <option value="PBag">PBag</option>
+                                            <option value="PQtl">PQtl</option>
+                                            <option value="Fix">Fix</option>
+                                    </select>
+                                        </div>
+                                        <div class="input-group-col col-sm-12">
+                                            <br />
+                                            <input data-repeater-delete type="button" value="X" style="float: right;margin-top:-78px; margin-right: -108px;" class="inner btn btn-danger"/>
+                                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main_brand_add_button">
+                    <input data-repeater-create type="button" style="margin-top: -138px;margin-left: 12px;width: 42px;" value="+" class="btn btn-primary"/>
+                </div>
+            </div>    
+                </div>
+                <br/>
+                <button type="submit" name="save" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+                     <form method="POST" action="" class="repeater" id="edit_product_mast" style="display:none; width: 892px;">
+                    <div class="row">
+                         <div class="col-sm-4">
+                          <label>Product Code:</label>
+                            <input class="form-control p_code" placeholder="Product Code" name="p_code" type="number">
+                            <span class="form_error">Please Enter Product Code </span>
+                    </div> 
+                         <div class="col-sm-4">
+                          <label>Product Name:</label>
+                            <input class="form-control product_name" placeholder="Product Name" name="product_name" type="text" required="">
+                            <span class="form_error">Please Enter Product Name </span>
+                    </div> 
+                      <div class="col-sm-4">
+                          <label>Short Name:</label>
+                            <input class="form-control short_name" placeholder="Short Name" name="short_name" type="text">
+                            <span class="form_error">Please Enter Short Name </span>
+                    </div>
+                   
+                </div>
+                 <div class="row"> 
+                    
+                      
+                      <div class="col-sm-4">
+                          <label>HSN Code:</label>
+                            <input class="form-control hsn_code" placeholder="HSN Code" name="hsn_code" type="text">
+                            <span class="form_error">Please Enter HSN Code </span>
+                    </div> 
+                         <div class="col-sm-4">
+                          <label>Item Group:</label>
+                           <input name="item_name" list="item_name" placeholder="Item Group" class="form-control item_name" required="">
+                          <datalist id="item_name">  
+                            <option value="">Select Name </option>
+                            {{#each product}}
+                            <option value="{{this.item_name}}" data-serialnum="{{this.item_name}}">{{this.item_name}}</option>
+                            {{/each}}
+                        </datalist>
+                            <span class="form_error">Please Enter State Name</span>
+                    </div> 
+                     <div class="col-sm-4">
+                          <label>Item Unit:</label>
+                            <select class="form-control item_unit" name="item_unit" id="item_unit">
+                                <option value="">Select Unit...</option>
+                                <option value="Bori">Bori</option>
+                                <option value="Katta">Katta</option>
+                                <option value="Box">Box</option>
+                                <option value="KG">KG</option>
+                            </select>
+                            <span class="form_error">Please Enter Item Unit </span>
+                    </div>  
+                </div>
+                <br/>
+                {{!-- <div class="row"> --}}
+                   <div class="col-sm-12">
+                        <div class="row product_brand_variaton">
+                        <div class="row">
+                        <div class="input-group-col col-sm-2"><label style="">Pack Size in(KG)</label></div>
+                        <div class="input-group-col col-sm-2"><label style="margin-left: -18px;">Katta/Bori/Box</label></div>
+                        <div class="input-group-col col-sm-2"><label style="margin-left: -58px;">Brok Rate (Seller)</label></div>
+                        <div class="input-group-col col-sm-2"><label style="margin-left: -78px;">Brok Rate Type (Seller)</label></div>
+                        <div class="input-group-col col-sm-2"><label style="margin-left: -108px;">Brok Rate (Buyer)</label></div>
+                        <div class="input-group-col col-sm-2"><label style="margin-left: -128px;">Brok Rate Type (Buyer)</label></div>
+                     </div>
+                </div>
+                   <input type="button" value="+" class="outer-add-btn btn btn-primary" style="float: right;margin-top: -46px;margin-right: 42px;">
+            </div>
+                <br/>
+                <button type="submit" name="save" class="btn btn-success">Update</button>
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </form>
+        </div>
+      </div>
+      </div>
+        <div class="col-lg-12" style="margin-top: 22px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i>Product Masters LIST
+                </div>
+                <div class="table-responsive">
+                    <table class="product_detail_table">
+                        <thead>
+                        <tr>
+                            <th>Sno.</th>
+                            <th>Product Code</th>
+                            <th>Product Name</th>
+                            <th>Short Name</th>
+                            <th>HSN Code</th>
+                            <th>Item Group</th>
+                            <th>Item Unit</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                      </tr>  
+                        </thead>
+                        <tbody>
+                                {{#each product_mast as |value key|}}
+                                <tr>
+                                    <td>{{sum @index 1}}</td>
+                                    <td>{{this.p_code}}</td>
+                                    <td>{{this.product_name}}</td>
+                                    <td>{{this.short_name}}</td>
+                                    <td>{{this.hsn_code}}</td>
+                                    <td>{{this.item_name}}</td>
+                                    <td>{{this.item_unit}}</td>
+                                    <td><a href="javascript:void(0);"  class="edit_product_mast_btn" data-id="{{this._id}}"><i class="fa fa-pencil"></i></i></a></td>
+                                    <td><a href="javascript:void(0);" class="delete_product_mast" data-id="{{this._id}}"><i class="fa fa-trash-o" style="color:red;"></a></td>
+                               </tr>
+                              {{/each}}  
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                </div>
+        </div>  
+        </div>
+        {{> footer}}
