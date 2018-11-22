@@ -11,8 +11,15 @@ const moment = require('moment');
 const div_com = require('./models/company_schema');
 let userright = require('./models/user_right_schema');
 
-const PORT = process.env.PORT || 3000;
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://ravisoftsolution:ravi123@ds243212.mlab.com:43212/suda');
+///////mongo local connection
+var MongoClient = require('mongodb').MongoClient;
+
+var url = 'mongodb://localhost:27017/suda';
+
+//moongose online   
+ const PORT = process.env.PORT || 3000;
+ var onlineurl = 'mongodb://ravisoftsolution:ravi123@ds243212.mlab.com:43212/suda';
+mongoose.connect(process.env.MONGOLAB_URI || url);
 let db = mongoose.connection;
 db.once('open', function () {
     console.log('Connected to MongoDB');
@@ -22,6 +29,10 @@ db.once('open', function () {
 db.on('error', function (err) {
     console.log(err);
 });
+
+
+///////mongo online connection close
+
 
 var app = express();
 
